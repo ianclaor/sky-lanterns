@@ -19,8 +19,6 @@ export default function Display() {
     //     return () => clearInterval(timer);
     //   }, []);
 
-    const [wishes, setWishes] = useState([]);
-
     useEffect(() => {
         const unsubscribe = subscribeApproved(
             (data) => {
@@ -54,19 +52,13 @@ export default function Display() {
                     <div
                         key={wish.id}
                         className="lantern-wrapper"
-                        onAnimationEnd={() => {
-                            setWishes((prev) =>
-                                prev.filter(
-                                    (item) => item.id !== wish.id
-                                )
-                            );
-                        }}
                         style={{
                             left: `${((index * 22) % 80) + 5}%`,
-                            animation: "floatSky1 25s linear forwards",
+                            animation: "floatSky1 25s linear infinite",
                             animationDelay: `${index * 0.8}s`,
                         }}
                     >
+
 
                         <div className="lantern-body">
                             <div className="lantern-name">
