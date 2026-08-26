@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  background: #010206;
+  color: #fef3c7;
+}
+
+.top-header {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.header-title {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fde047;
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.9);
+}
+
+.main-viewport {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px 20px;
+
+  background:
+    radial-gradient(circle at 50% 30%, rgba(88, 28, 135, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 15% 70%, rgba(30, 58, 138, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(49, 46, 129, 0.45) 0%, transparent 55%),
+    radial-gradient(circle at 50% 100%, rgba(180, 83, 9, 0.25) 0%, transparent 70%),
+    linear-gradient(to bottom, #000206 0%, #030712 35%, #090d24 70%, #02040a 100%);
+}
+
+.wish-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+
+  background: rgba(1, 2, 6, 0.85);
+
+  border: 1px solid rgba(251, 191, 36, 0.35);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 0 30px rgba(245, 158, 11, 0.2),
+    0 0 60px rgba(0, 0, 0, 0.8);
+}
+
+.wish-card h1 {
+  margin: 0 0 10px;
+  text-align: center;
+  color: #fde047;
+  font-size: 3rem;
+}
+
+.wish-card p {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fef3c7;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #fde047;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(251, 191, 36, 0.3);
+
+  background: rgba(15, 23, 42, 0.8);
+
+  color: white;
+
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #fde047;
+  box-shadow: 0 0 12px rgba(253, 224, 71, 0.4);
+}
+
+.form-group textarea {
+  min-height: 120px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  color: #451a03;
+
+  background: linear-gradient(
+    135deg,
+    #fde047,
+    #f59e0b
+  );
+}
+
+.submit-btn:hover {
+  opacity: 0.95;
+}
+
+.success-msg {
+  display: none;
+
+  margin-top: 15px;
+  padding: 15px;
+
+  border-radius: 10px;
+
+  background: rgba(34, 197, 94, 0.2);
+
+  border: 1px solid rgba(34, 197, 94, 0.5);
+
+  color: #86efac;
+
+  text-align: center;
+}
+
+.success-msg.visible {
+  display: block;
+}
