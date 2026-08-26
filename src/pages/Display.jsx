@@ -4,7 +4,7 @@ import { subscribeApproved } from "../services/wishService";
 import "../styles/display.css";
 
 export default function Display() {
-    //   const [wishes, setWishes] = useState([]);
+      const [wishes, setWishes] = useState([]);
 
     //   useEffect(() => {
     //     const loadData = async () => {
