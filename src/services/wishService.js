@@ -5,6 +5,9 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  query,
+  where,
+  onSnapshot,
 } from "firebase/firestore";
 
 import { db } from "../firebase";
@@ -50,4 +53,22 @@ export const approveWish = async (id, value) => {
 
 export const deleteWish = async (id) => {
   await deleteDoc(doc(db, "wishes", id));
+};
+
+/* REALTIME APPROVED WISHES */
+
+export const subscribeApproved = (callback) => {
+  const q = query(
+    collection(db, "wishes"),
+    where("approved", "==", true)
+  );
+
+  return onSnapshot(q, (snapshot) => {
+    const data = snapshot.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+
+    callback(data);
+  });
 };

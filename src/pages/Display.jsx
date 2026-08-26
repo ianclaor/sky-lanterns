@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getApproved } from "../services/wishService";
+// import { getApproved } from "../services/wishService";
+import { subscribeApproved } from "../services/wishService";
 import "../styles/display.css";
 
 export default function Display() {
@@ -21,28 +22,13 @@ export default function Display() {
     const [wishes, setWishes] = useState([]);
 
     useEffect(() => {
-        const loadData = async () => {
-            const data = await getApproved();
+        const unsubscribe = subscribeApproved(
+            (data) => {
+                setWishes(data);
+            }
+        );
 
-            setWishes((prev) => {
-                const existingIds = prev.map(
-                    (item) => item.id
-                );
-
-                const newLanterns = data.filter(
-                    (item) =>
-                        !existingIds.includes(item.id)
-                );
-
-                return [...prev, ...newLanterns];
-            });
-        };
-
-        loadData();
-
-        const timer = setInterval(loadData, 2000);
-
-        return () => clearInterval(timer);
+        return () => unsubscribe();
     }, []);
 
     return (
@@ -78,7 +64,7 @@ export default function Display() {
                         style={{
                             left: `${((index * 22) % 80) + 5}%`,
                             animation: "floatSky1 25s linear forwards",
-                            animationDelay: `${(index * 0.8)}s`,
+                            animationDelay: `${index * 0.8}s`,
                         }}
                     >
 
