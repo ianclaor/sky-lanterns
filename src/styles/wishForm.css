@@ -160,3 +160,8 @@ body {
 .success-msg.visible {
   display: block;
 }
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

@@ -6,9 +6,35 @@ export default function WishForm() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [saving, setSaving] = useState(false);
 
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     await saveSubmission({
+  //       name: name.trim(),
+  //       message: message.trim(),
+  //     });
+
+  //     setName("");
+  //     setMessage("");
+
+  //     setSuccess(true);
+
+  //     setTimeout(() => {
+  //       setSuccess(false);
+  //     }, 3000);
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Failed to save wish.");
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setSaving(true);
 
     try {
       await saveSubmission({
@@ -27,8 +53,11 @@ export default function WishForm() {
     } catch (error) {
       console.error(error);
       alert("Failed to save wish.");
+    } finally {
+      setSaving(false);
     }
   };
+
 
   return (
     <>
@@ -89,8 +118,11 @@ export default function WishForm() {
             <button
               type="submit"
               className="submit-btn"
+              disabled={saving}
             >
-              Release Lantern
+              {saving
+                ? "Releasing Lantern..."
+                : "Release Lantern"}
             </button>
           </form>
 
