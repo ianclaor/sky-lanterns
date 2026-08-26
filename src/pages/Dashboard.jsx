@@ -49,6 +49,21 @@ export default function Dashboard() {
     await loadData();
   };
 
+
+  const clearAll = async () => {
+    const confirmed = window.confirm(
+      "Delete ALL wishes?"
+    );
+
+    if (!confirmed) return;
+
+    for (const wish of wishes) {
+      await deleteWish(wish.id);
+    }
+
+    await loadData();
+  };
+
   const handleDelete = async (id) => {
     const confirmed = window.confirm(
       "Delete this wish?"
@@ -114,47 +129,57 @@ export default function Dashboard() {
           >
             Approve All Pending
           </button>
+
+          <button
+            className="clear-btn"
+            onClick={clearAll}
+          >
+            Clear All
+          </button>
         </div>
+
       </div>
 
-      {filtered.map((wish) => {
-        const isApproved = approved.some(
-          (item) => item.id === wish.id
-        );
+        {
+          filtered.map((wish) => {
+            const isApproved = approved.some(
+              (item) => item.id === wish.id
+            );
 
-        return (
-          <div
-            key={wish.id}
-            className="wish-item"
-          >
-            <h3>{wish.name}</h3>
-
-            <p>{wish.message}</p>
-
-            <div className="actions">
-              <button
-                className="approve-btn"
-                onClick={() =>
-                  toggleApprove(wish)
-                }
+            return (
+              <div
+                key={wish.id}
+                className="wish-item"
               >
-                {isApproved
-                  ? "Unapprove"
-                  : "Approve"}
-              </button>
+                <h3>{wish.name}</h3>
 
-              <button
-                className="delete-btn"
-                onClick={() =>
-                  handleDelete(wish.id)
-                }
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+                <p>{wish.message}</p>
+
+                <div className="actions">
+                  <button
+                    className="approve-btn"
+                    onClick={() =>
+                      toggleApprove(wish)
+                    }
+                  >
+                    {isApproved
+                      ? "Unapprove"
+                      : "Approve"}
+                  </button>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() =>
+                      handleDelete(wish.id)
+                    }
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
   );
 }
