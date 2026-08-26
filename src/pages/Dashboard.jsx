@@ -3,7 +3,7 @@ import {
   getSubmissions,
   getApproved,
   saveApproved,
-} from "../Services/wishService";
+} from "../services/wishService";
 
 import "../styles/dashboard.css";
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getApproved } from "../Services/wishService";
+import { getApproved } from "../services/wishService";
 import "../styles/display.css";
 
 export default function Display() {

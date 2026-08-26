@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../styles/wishForm.css";
-import { saveSubmission } from "../Services/wishService";
+import { saveSubmission } from "../services/wishService";
 
 export default function WishForm() {
   const [name, setName] = useState("");
