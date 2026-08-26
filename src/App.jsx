@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WishForm from "./pages/WishForm";
-import Dashboard from "./Pages/Dashboard";
-import Display from "./Pages/Display";
+import Dashboard from "./pages/Dashboard";
+import Display from "./pages/Display";
 
 function App() {
   return (
