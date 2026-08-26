@@ -7,21 +7,27 @@ export default function WishForm() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    saveSubmission({
-      name: name.trim(),
-      message: message.trim(),
-    });
+    try {
+      await saveSubmission({
+        name: name.trim(),
+        message: message.trim(),
+      });
 
-    setName("");
-    setMessage("");
-    setSuccess(true);
+      setName("");
+      setMessage("");
 
-    setTimeout(() => {
-      setSuccess(false);
-    }, 3000);
+      setSuccess(true);
+
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save wish.");
+    }
   };
 
   return (

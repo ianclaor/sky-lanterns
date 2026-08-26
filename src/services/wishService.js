@@ -1,31 +1,53 @@
-const SUBMISSION_KEY = "formSubmissions_v1";
-const APPROVED_KEY = "approvedSubmissions_v1";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
-export const getSubmissions = () => {
-  return JSON.parse(localStorage.getItem(SUBMISSION_KEY)) || [];
-};
+import { db } from "../firebase";
 
-export const saveSubmission = (wish) => {
-  const submissions = getSubmissions();
+const wishesCollection = collection(db, "wishes");
 
-  submissions.push({
-    id: Date.now(),
-    ...wish,
+export const saveSubmission = async (wish) => {
+  await addDoc(wishesCollection, {
+    name: wish.name,
+    message: wish.message,
+    approved: false,
+    createdAt: Date.now(),
   });
-
-  localStorage.setItem(
-    SUBMISSION_KEY,
-    JSON.stringify(submissions)
-  );
 };
 
-export const getApproved = () => {
-  return JSON.parse(localStorage.getItem(APPROVED_KEY)) || [];
+export const getSubmissions = async () => {
+  const snapshot = await getDocs(wishesCollection);
+
+  return snapshot.docs.map((d) => ({
+    id: d.id,
+    ...d.data(),
+  }));
 };
 
-export const saveApproved = (approved) => {
-  localStorage.setItem(
-    APPROVED_KEY,
-    JSON.stringify(approved)
-  );
+export const getApproved = async () => {
+  const snapshot = await getDocs(wishesCollection);
+
+  return snapshot.docs
+    .map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }))
+    .filter((x) => x.approved);
+};
+
+export const approveWish = async (id, value) => {
+  const ref = doc(db, "wishes", id);
+
+  await updateDoc(ref, {
+    approved: value,
+  });
+};
+
+export const deleteWish = async (id) => {
+  await deleteDoc(doc(db, "wishes", id));
 };
