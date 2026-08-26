@@ -140,46 +140,46 @@ export default function Dashboard() {
 
       </div>
 
-        {
-          filtered.map((wish) => {
-            const isApproved = approved.some(
-              (item) => item.id === wish.id
-            );
+      <div className="wishes-grid">
+        {filtered.map((wish) => {
+          const isApproved = approved.some(
+            (item) => item.id === wish.id
+          );
 
-            return (
-              <div
-                key={wish.id}
-                className="wish-item"
-              >
+          return (
+            <div
+              key={wish.id}
+              className="wish-item"
+            >
+              <div className="wish-content">
                 <h3>{wish.name}</h3>
-
                 <p>{wish.message}</p>
-
-                <div className="actions">
-                  <button
-                    className="approve-btn"
-                    onClick={() =>
-                      toggleApprove(wish)
-                    }
-                  >
-                    {isApproved
-                      ? "Unapprove"
-                      : "Approve"}
-                  </button>
-
-                  <button
-                    className="delete-btn"
-                    onClick={() =>
-                      handleDelete(wish.id)
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
               </div>
-            );
-          })
-        }
+
+              <div className="actions">
+                <button
+                  className="approve-btn"
+                  onClick={() => toggleApprove(wish)}
+                >
+                  {isApproved
+                    ? "Unapprove"
+                    : "Approve"}
+                </button>
+
+                <button
+                  className="delete-btn"
+                  onClick={() =>
+                    handleDelete(wish.id)
+                  }
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
+
+    </div>
   );
 }
